@@ -227,7 +227,7 @@ const Registros = () => {
         nombre: formData.nombre.trim(),
         apellidoPaterno: formData.apellidoPaterno.trim(),
         apellidoMaterno: formData.apellidoMaterno.trim() || null,
-        lugar: 'Ambiolab Ingeneria Ambiental S.A. de C.V.',
+        lugar: 'Labsa S.A. de C.V.',
         fecha: formatFecha(formData.dia, formData.hora),
         departamento: formData.departamento,
         detalle: formData.detalle.trim() || null
