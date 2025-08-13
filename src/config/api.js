@@ -1,5 +1,5 @@
 // Configuración de URLs de API
-const API_BASE_URL = process.env.REACT_APP_API_URL || 'https://apislab.duckdns.org';
+const API_BASE_URL = process.env.REACT_APP_API_URL;
 
 const API = {
   auth: {

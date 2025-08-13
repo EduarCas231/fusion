@@ -394,6 +394,11 @@ function Escaner() {
                     🎉 ¡Bienvenido a LABSA!<br/>
                     Favor de pasar al área asignada
                   </div>
+                  
+                  <div className="security-notice">
+                    ⚠️ ¡Por su seguridad dentro de LABSA usted estará siendo grabado!<br/>
+                    Recuerde presentar su identificación al ingresar
+                  </div>
                 </div>
               )}
               

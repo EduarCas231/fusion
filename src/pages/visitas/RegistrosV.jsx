@@ -265,6 +265,7 @@ const Registros = () => {
               </button>
             </div>
             <p class="qr-instruction">Recuerde presentar su identificación al ingresar</p>
+            <p class="security-notice">⚠️ ¡Por su seguridad dentro de LABSA usted estará siendo grabado!</p>
           </div>
         `,
         icon: 'success',
