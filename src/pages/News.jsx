@@ -50,7 +50,7 @@ const News = () => {
         throw new Error('Error al eliminar la noticia');
       }
       
-      // Animación de eliminación
+      
       const noticiaElement = document.getElementById(`noticia-${id}`);
       if (noticiaElement) {
         noticiaElement.classList.add('fade-out');
@@ -96,7 +96,7 @@ const News = () => {
       handleEliminarNoticia(id);
     });
     
-    // Cerrar al hacer clic fuera del modal
+   
     modal.addEventListener('click', (e) => {
       if (e.target === modal) {
         closeModal();

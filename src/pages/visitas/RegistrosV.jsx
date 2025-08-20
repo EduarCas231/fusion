@@ -51,12 +51,12 @@ const Registros = () => {
 
   const downloadQR = (qrBase64, codigo) => {
     try {
-      // Validar que el base64 no esté vacío
+     
       if (!qrBase64 || qrBase64.length < 100) {
         throw new Error('QR data is invalid');
       }
       
-      // Convertir base64 a blob
+      
       const binaryString = atob(qrBase64);
       const bytes = new Uint8Array(binaryString.length);
       for (let i = 0; i < binaryString.length; i++) {
@@ -64,7 +64,7 @@ const Registros = () => {
       }
       const blob = new Blob([bytes], { type: 'image/png' });
       
-      // Crear URL del blob y descargar
+      
       const url = URL.createObjectURL(blob);
       const link = document.createElement('a');
       link.href = url;
@@ -73,7 +73,7 @@ const Registros = () => {
       link.click();
       document.body.removeChild(link);
       
-      // Limpiar URL del blob
+      
       setTimeout(() => URL.revokeObjectURL(url), 100);
       
     } catch (error) {
@@ -88,15 +88,15 @@ const Registros = () => {
   };
 
   const shareQR = async (qrBase64, codigo, nombre) => {
-    // Primero intentar Web Share API (funciona bien en móviles)
+    
     if (navigator.share && navigator.canShare) {
       try {
-        // Validar que el base64 no esté vacío
+        
         if (!qrBase64 || qrBase64.length < 100) {
           throw new Error('QR data is invalid');
         }
         
-        // Convertir base64 a blob de forma más robusta
+        
         const binaryString = atob(qrBase64);
         const bytes = new Uint8Array(binaryString.length);
         for (let i = 0; i < binaryString.length; i++) {
@@ -104,7 +104,7 @@ const Registros = () => {
         }
         const blob = new Blob([bytes], { type: 'image/png' });
         
-        // Validar que el blob tenga contenido
+        
         if (blob.size === 0) {
           throw new Error('Generated blob is empty');
         }
@@ -115,7 +115,7 @@ const Registros = () => {
           lastModified: Date.now()
         });
         
-        // Verificar que se puede compartir archivos
+       
         if (navigator.canShare && navigator.canShare({ files: [file] })) {
           await navigator.share({
             title: 'Código QR - Visita LABSA',
@@ -129,7 +129,7 @@ const Registros = () => {
       }
     }
     
-    // Fallback: mostrar opciones de compartir
+  
     showShareOptions(qrBase64, codigo, nombre);
   };
 

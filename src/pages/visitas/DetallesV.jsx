@@ -32,13 +32,13 @@ const DetallesV = () => {
   if (loading) return <p>Cargando detalles...</p>;
   if (!visita) return <p>No se encontró la visita.</p>;
 
-  // Convertir fecha a objeto Date
-  const fechaObj = new Date(visita.fecha);
-  // Obtener día y hora en formato legible
-  const dia = fechaObj.toLocaleDateString();   // Ejemplo: 15/5/2025 (según local)
-  const hora = fechaObj.toLocaleTimeString();  // Ejemplo: 14:30:00
 
-  // Solo usar el código de la visita para el QR
+  const fechaObj = new Date(visita.fecha);
+  
+  const dia = fechaObj.toLocaleDateString();  
+  const hora = fechaObj.toLocaleTimeString(); 
+
+  
   const qrData = `${visita.codigo}`;
 
   return (

@@ -163,7 +163,7 @@ const Pedidos = () => {
           <p className="pedidos-empty-message">No hay pedidos disponibles.</p>
         ) : (
           <>
-            {/* Tabla para desktop */}
+           
             <div className="table-responsive">
               <table className="pedidos-table">
                 <thead className="pedidos-table-header">
@@ -234,7 +234,7 @@ const Pedidos = () => {
             </table>
             </div>
             
-            {/* Cards para móviles */}
+            
             <div className="pedidos-cards">
               {pedidos.map((pedido) => {
                 const diasRestantes = calcularDiasRestantes(pedido.fecha_inicio, pedido.fecha_final);

@@ -206,7 +206,7 @@ function Escaner() {
         if (result.isConfirmed) {
           setScanning(true);
         } else if (result.isDismissed) {
-          // Enfocar en el input manual
+          
           setScanning(true);
           setTimeout(() => {
             const manualInput = document.querySelector('.manual-input');
@@ -390,7 +390,7 @@ function Escaner() {
                     )}
                   </div>
                   
-                  <div className="welcome-msg">
+                  <div className="welcome-msg"> 
                     🎉 ¡Bienvenido a LABSA!<br/>
                     Favor de pasar al área asignada
                   </div>

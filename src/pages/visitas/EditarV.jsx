@@ -169,7 +169,7 @@ const Editar = () => {
 
       <form onSubmit={handleSubmit} className="edit-form">
         <div className="form-grid">
-          {/* Nombre */}
+          
           <div className="form-group">
             <label className="form-label">
               <FiUser className="input-icon" />
@@ -185,7 +185,7 @@ const Editar = () => {
             />
           </div>
 
-          {/* Apellido Paterno */}
+          
           <div className="form-group">
             <label className="form-label">
               <FiUser className="input-icon" />
@@ -201,7 +201,7 @@ const Editar = () => {
             />
           </div>
 
-          {/* Apellido Materno */}
+          
           <div className="form-group">
             <label className="form-label">
               <FiUser className="input-icon" />
@@ -216,7 +216,7 @@ const Editar = () => {
             />
           </div>
 
-          {/* Lugar (readonly) */}
+          
           <div className="form-group">
             <label className="form-label">
               <FiHome className="input-icon" />
@@ -232,7 +232,7 @@ const Editar = () => {
             />
           </div>
 
-          {/* Hora */}
+          
           <div className="form-group">
             <label className="form-label">
               <FiClock className="input-icon" />
@@ -248,7 +248,7 @@ const Editar = () => {
             />
           </div>
 
-          {/* Fecha */}
+          
           <div className="form-group">
             <label className="form-label">
               <FiCalendar className="input-icon" />
@@ -264,7 +264,7 @@ const Editar = () => {
             />
           </div>
 
-          {/* Departamento */}
+          
           <div className="form-group">
             <label className="form-label">
               <FiBriefcase className="input-icon" />
@@ -280,7 +280,7 @@ const Editar = () => {
             />
           </div>
 
-          {/* Detalle */}
+          
           <div className="form-group full-width">
             <label className="form-label">
               <FiFileText className="input-icon" />

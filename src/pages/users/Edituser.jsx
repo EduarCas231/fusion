@@ -78,7 +78,7 @@ const EditUser = () => {
       const token = localStorage.getItem('token');
       const updateData = {};
       
-      // Solo enviar campos que no estén vacíos
+      
       if (formData.nombre.trim()) updateData.nombre = formData.nombre.trim();
       if (formData.app.trim()) updateData.app = formData.app.trim();
       if (formData.apm.trim()) updateData.apm = formData.apm.trim();

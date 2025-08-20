@@ -27,7 +27,6 @@ export default function Registro() {
   const [touched, setTouched] = useState({});
   const navigate = useNavigate();
 
-  // Validación de contraseña
   useEffect(() => {
     if (!formData.password) {
       setPasswordScore(0);
@@ -43,7 +42,7 @@ export default function Registro() {
     setPasswordScore(score);
   }, [formData.password]);
 
-  // Validación de campos
+
   const validateField = (name, value) => {
     let error = "";
     
@@ -84,7 +83,7 @@ export default function Registro() {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
     
-    // Validación en tiempo real para campos tocados
+ 
     if (touched[name]) {
       const error = validateField(name, value);
       setErrors({ ...errors, [name]: error });

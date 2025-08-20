@@ -15,12 +15,12 @@ const EditN = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    // Cargar los datos de la noticia
+   
     const fetchNoticia = async () => {
       try {
         console.log("Intentando cargar noticia con ID:", id);
         
-        // Primero intentamos obtener todas las noticias
+       
         const response = await fetch(API.news.getAll);
         if (!response.ok) {
           throw new Error('Error al cargar las noticias');
@@ -29,7 +29,7 @@ const EditN = () => {
         const noticias = await response.json();
         console.log("Noticias cargadas:", noticias);
         
-        // Buscamos la noticia con el ID correspondiente
+        
         const noticiaEncontrada = noticias.find(noticia => 
           noticia.id_new.toString() === id.toString()
         );
@@ -69,10 +69,10 @@ const EditN = () => {
     setError(null);
 
     try {
-      // Convertimos el ID a entero para asegurarnos que se envía como número
+      
       const idNumerico = parseInt(id, 10);
       
-      // Usamos PUT para actualizar en lugar de POST
+      
       const response = await fetch(API.news.update(idNumerico), {
         method: 'PUT',
         headers: {
@@ -85,7 +85,7 @@ const EditN = () => {
         throw new Error('Error al actualizar la noticia');
       }
 
-      // Redirigir a la página de noticias después de actualizar
+      
       navigate('/News');
     } catch (err) {
       console.error("Error al actualizar:", err);

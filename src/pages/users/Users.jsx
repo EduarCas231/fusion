@@ -11,7 +11,7 @@ const Users = () => {
   const [usuarios, setUsuarios] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [viewType, setViewType] = useState('grid'); // 'grid' o 'list'
+  const [viewType, setViewType] = useState('grid'); 
 
   const handleEditUser = (userId) => {
     navigate(`/users/edit/${userId}`);

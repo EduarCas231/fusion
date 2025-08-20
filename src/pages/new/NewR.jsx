@@ -38,7 +38,7 @@ const NewR = () => {
         throw new Error('Error al crear la noticia');
       }
 
-      // Redirigir a la página de noticias después de crear
+      
       navigate('/news');
     } catch (err) {
       setError(err.message);
