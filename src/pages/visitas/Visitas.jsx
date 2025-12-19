@@ -25,10 +25,17 @@ const Visitas = () => {
 
   const fetchVisitas = async () => {
     try {
-      setLoading(true);
-      setError(null);
+      if (!loading) {
+        // Solo mostrar loading en carga inicial
+        setError(null);
+      } else {
+        setLoading(true);
+        setError(null);
+      }
 
-      const response = await fetch(API.visitas.getAll);
+      const response = await fetch(API.visitas.getAll, {
+        signal: AbortSignal.timeout(10000) // 10 segundos timeout
+      });
 
       if (!response.ok) throw new Error('Error al obtener los datos');
 
@@ -38,18 +45,24 @@ const Visitas = () => {
         throw new Error('Formato inesperado de datos recibidos');
       }
 
-      
-      await fetchNotificaciones();
-
       setVisitas(data.data);
+      
+      // Limpiar error si la petición fue exitosa
+      if (error) setError(null);
     } catch (err) {
-      setError(err.message);
-      Swal.fire({
-        title: 'Error',
-        text: err.message,
-        icon: 'error',
-        confirmButtonColor: '#2b91e7'
-      });
+      // Solo mostrar error si es la carga inicial o si es un error diferente de timeout
+      if (loading || err.name !== 'AbortError') {
+        console.warn('Error al actualizar visitas:', err.message);
+        if (loading) {
+          setError(err.message);
+          Swal.fire({
+            title: 'Error',
+            text: err.message,
+            icon: 'error',
+            confirmButtonColor: '#2b91e7'
+          });
+        }
+      }
     } finally {
       setLoading(false);
     }
@@ -60,21 +73,29 @@ const Visitas = () => {
     fetchNotificaciones();
    
     const interval = setInterval(() => {
-      fetchVisitas();
-      fetchNotificaciones();
-    }, 100000);
+      // Solo actualizar si no hay errores de conexión previos
+      if (!error) {
+        fetchVisitas();
+        fetchNotificaciones();
+      }
+    }, 60000); // Cambiar a 60 segundos para reducir carga
     return () => clearInterval(interval);
-  }, []);
+  }, [error]);
 
   const fetchNotificaciones = async () => {
     try {
-      const response = await fetch(API.notificaciones.getAll);
+      const response = await fetch(API.notificaciones.getAll, {
+        signal: AbortSignal.timeout(8000) // 8 segundos timeout
+      });
       if (response.ok) {
         const data = await response.json();
         setNotificaciones(data.data || []);
       }
     } catch (error) {
-      console.error('Error al cargar notificaciones:', error);
+      // Solo log en consola, no mostrar error al usuario para notificaciones
+      if (error.name !== 'AbortError') {
+        console.warn('Error al cargar notificaciones:', error.message);
+      }
     }
   };
 

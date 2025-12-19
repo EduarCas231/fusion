@@ -17,7 +17,9 @@ const Pedidos = () => {
   const fetchPedidos = useCallback(async () => {
     try {
       if (!initialLoad) setIsLoading(true);
-      const response = await fetch(API.pedidos.getAll);
+      const response = await fetch(API.pedidos.getAll, {
+        signal: AbortSignal.timeout(10000) // 10 segundos timeout
+      });
       if (!response.ok) throw new Error('Error al obtener pedidos');
       const newData = await response.json();
       
@@ -42,19 +44,33 @@ const Pedidos = () => {
         
         return Array.from(pedidosMap.values()).sort((a, b) => b.id_pedidos - a.id_pedidos);
       });
+      
+      // Limpiar error si la petición fue exitosa
+      if (error) setError('');
     } catch (err) {
-      setError(err.message);
+      // Solo mostrar error si es la carga inicial o si es un error diferente
+      if (initialLoad || err.name !== 'AbortError') {
+        console.warn('Error al actualizar pedidos:', err.message);
+        if (initialLoad) {
+          setError(err.message);
+        }
+      }
     } finally {
       if (initialLoad) setInitialLoad(false);
       setIsLoading(false);
     }
-  }, [initialLoad]);
+  }, [initialLoad, error]);
 
   useEffect(() => {
     fetchPedidos();
-    const intervalId = setInterval(fetchPedidos, 50000);
+    const intervalId = setInterval(() => {
+      // Solo actualizar si no hay errores de conexión previos
+      if (!error) {
+        fetchPedidos();
+      }
+    }, 60000); // Cambiar a 60 segundos para reducir carga
     return () => clearInterval(intervalId);
-  }, [fetchPedidos]);
+  }, [fetchPedidos, error]);
 
   const handleNuevoRegistro = () => {
     navigate('/registros');

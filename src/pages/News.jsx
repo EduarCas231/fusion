@@ -14,14 +14,18 @@ const News = () => {
   useEffect(() => {
     const fetchNoticias = async () => {
       try {
-        const response = await fetch(API.news.getAll);
+        const response = await fetch(API.news.getAll, {
+          signal: AbortSignal.timeout(10000) // 10 segundos timeout
+        });
         if (!response.ok) {
           throw new Error('Error al cargar las noticias');
         }
         const data = await response.json();
         setNoticias(data);
       } catch (err) {
-        setError(err.message);
+        if (err.name !== 'AbortError') {
+          setError(err.message);
+        }
       } finally {
         setCargando(false);
       }
@@ -44,12 +48,12 @@ const News = () => {
     try {
       const response = await fetch(API.news.delete(id), {
         method: 'DELETE',
+        signal: AbortSignal.timeout(8000) // 8 segundos timeout
       });
       
       if (!response.ok) {
         throw new Error('Error al eliminar la noticia');
       }
-      
       
       const noticiaElement = document.getElementById(`noticia-${id}`);
       if (noticiaElement) {
@@ -60,7 +64,9 @@ const News = () => {
         }, 300);
       }
     } catch (err) {
-      setError(err.message);
+      if (err.name !== 'AbortError') {
+        setError(err.message);
+      }
       setEliminandoId(null);
     }
   };
