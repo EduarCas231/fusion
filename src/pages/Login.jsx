@@ -1,6 +1,7 @@
 
 import React, { useState } from "react";
 import LabsaLogo from "../components/LabsaLogo";
+import Snowfall from "../components/Snowfall";
 import { useNavigate } from "react-router-dom";
 import "../styles/Login.css";
 import API from "../config/api";
@@ -69,6 +70,7 @@ export default function Login() {
 
   return (
     <div className="login-container">
+      <Snowfall />
       <div className="login-card">
         <div className="logo-section">
           <LabsaLogo />
